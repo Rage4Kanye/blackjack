@@ -26,7 +26,8 @@ class Deck:
             'J': 10,
             'Q': 10,
             'K': 10,
-            'A': 11
+            'A': 11,
+            'a': 1
         }
 
     def deal_and_remove_card(self):
