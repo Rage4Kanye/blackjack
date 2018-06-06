@@ -19,17 +19,50 @@ class Hand:
             self.cards.append(deck.deal_and_remove_card())
             self.cards.append(deck.deal_and_remove_card())
 
-    def calculate_value(self):
-        pass
+    def calculate_value(self, deck):
+
+        ##TODO Fix issue when player is dealt 'A' 'A', this will return 'a' 'a', need to be 'A' 'a'
+
+        score = 0
+
+        def ace_check():
+            for card in self.cards:
+                if card == 'A':
+                    return True
+
+        def ace_replace():
+            for card_pos in range(len(self.cards)):
+                if self.cards[card_pos] == 'A':
+                    self.cards[card_pos] = 'a'
+                    break
+
+        for card in self.cards:
+            score += deck.card_value[card]
+        if score < 21:
+            return score
+
+        if score == 21:
+            return score
+
+        if score > 21:
+            if ace_check:
+                ace_replace()
+                self.calculate_value(deck)
+            else:
+                return 'bust'
 
 
-    def draw_card(self):
-        pass
+    def add_card(self, deck):
+        self.cards.append(deck.deal_and_remove_card())
 
-    def hit(self):
-        pass
+    def hit(self, deck):
+        self.add_card(deck)
 
-    def double_down(self):
+    def double_down(self, deck):
+        self.add_card(deck)
+
+    ##TODO Add split eventually
+    def split(self):
         pass
 
     def stand(self):
@@ -38,7 +71,9 @@ class Hand:
 
 class Player():
     def __init__(self, deck):
-        pass
+        player_hands = []
+
+
 
 
 class Dealer():
